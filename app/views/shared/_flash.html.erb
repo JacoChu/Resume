@@ -1,6 +1,6 @@
-<div class="flash">
-
-    <div> <%= flash[:notice] %> </div>
-    <button>X </button>
-
-</div>
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <div><%= message %></div>
+    <button>X</button>
+  </div>
+<% end %>
