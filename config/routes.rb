@@ -9,7 +9,14 @@ Rails.application.routes.draw do
   patch 'resumes/:id', to: "resumes#update"
   # post '/'. to: 'pages#index'
 
-  get "/users/sign_up", to: "users#new"
+  # get "/users/sign_up", to: "users#new"
+  resource :users , only: [:create] do
+    get :sign_up
+    get :sign_in
+  end
+
+  resources :sessions, only: [:create, :destroy]do
+  end
 
   root 'resumes#index'
   
