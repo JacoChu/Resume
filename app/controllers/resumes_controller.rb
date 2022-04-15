@@ -1,5 +1,8 @@
 class ResumesController < ApplicationController
-    before_action :find_resume, only: [:edit, :update, :show, :destory]
+    before_action :find_resume, only: [:show ,:edit, :update,:destory ]
+    # before_action :authenticate_user,expect:[:index, :show]
+    # before_action :find_my_resume, expect:[:edit, :update,:destory ]
+    
 
     def index
         @resumes =Resume.all
@@ -10,7 +13,10 @@ class ResumesController < ApplicationController
     end
 
     def create
-        @resume = Resume.new(clean_params)
+        # @resume = Resume.new(clean_params)
+        # @resume.user_id = current_user.id
+        
+        @resume = current_user.resumes.new(clean_params)
 
         if @resume.save
             redirect_to resumes_path, notice: "新增成功"
@@ -35,12 +41,14 @@ class ResumesController < ApplicationController
 
     def update
         
-
         if @resume.update(clean_params)
             redirect_to resumes_path, notice: "更新成功"
         else
             render :edit
         end
+    end
+
+    def my
     end
 
 end
@@ -51,6 +59,10 @@ end
 
         def find_resume
             @resume = Resume.find(params[:id])
+        end
+
+        def find_my_resume
+            @resume = current_user.resumes.find(params[:id])
         end
 
         

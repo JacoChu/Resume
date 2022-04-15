@@ -4,8 +4,12 @@ class ApplicationController < ActionController::Base
 
     private
     def not_found
-    render file: "#{Rails.root}/public/not_found.html",
-    status: 404,
-    layout: false
+        render file: "#{Rails.root}/public/not_found.html",
+        status: 404,
+        layout: false
     end
+
+    
+
+
 end

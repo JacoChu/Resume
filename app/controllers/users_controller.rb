@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def sign_in
-    @user = User.new
+    
   end
 
   def create
